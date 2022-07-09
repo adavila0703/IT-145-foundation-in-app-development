@@ -89,32 +89,6 @@ public class challenges {
     System.out.println("Shipping cost(cents): " + shipCostCents);
   }
 
-  static public void OutputCombinations() {
-    Scanner scnr = new Scanner(System.in);
-    char a;
-    char b;
-    char c;
-
-    a = scnr.next().charAt(0);
-    b = scnr.next().charAt(0);
-    c = scnr.next().charAt(0);
-    scnr.nexts
-    char[] test = { a, b, c };
-    char[] test2 = { a, b, c };
-
-    System.out.printf
-
-    for (char first : test) {
-      for (char second : test2) {
-
-        
-      }
-      
-    }
-
-    System.out.println("");
-  }
-
   static public void scratch() {
     Scanner scnr = new Scanner(System.in);
     char letterToQuit;
@@ -126,7 +100,7 @@ public class challenges {
     System.out.printf("Press the %c key %d times to quit.", letterToQuit, numPresses);
   }
 
-  static public void main(String args[]) {
+  public static void main(String args[]) {
     // AccelerationOfGravity();
     // DiceRoll();
     scratch();
