@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class labs {
@@ -37,25 +39,60 @@ public class labs {
    * Max weight: 236.0
    */
 
-  public static Double[] GetWeights(Integer numberOfWeights, Scanner scnr) {
-    Double[] weights;
-    String message = "Enter weight %s: ";
-
-    for (int i = 0; i < numberOfWeights; i++) {
-      System.out.printf(message, i);
-      weights.
-      scnr.nextDouble();
+  public static <T> void printArray(T[] arr, String startingMessage) {
+    String arrMessage = "";
+    for (int i = 0; i < arr.length; i++) {
+      arrMessage += " " + arr[i].toString();
     }
-
-    return weights
+    arrMessage += "\n";
+    System.out.printf(startingMessage, arrMessage);
   }
 
-  public static void PeopleWeights() {
+  public static <T> T addArray(T[] arr, T startingValue) {
+    T summation = startingValue;
+    for (int i = 0; i < arr.length; i++) {
+      if (summation.getClass() == Double.class) {
+        (T) (Double) summation += (Double) arr[i];
+      }
+    }
+    return summation;
+  }
+
+  public static <T> void addArray(T[] arr) {
+    for (int i = 0; i < arr.length; i++) {
+      System.out.print(arr[i]);
+    }
+  }
+
+  public static Double[] getWeights(Integer numberOfWeights, Scanner scnr) {
+    Double[] weights = new Double[numberOfWeights];
+    String message = "Enter weight %s:";
+
+    for (int i = 1; i < numberOfWeights + 1; i++) {
+      System.out.printf(message, i);
+      Double weight = scnr.nextDouble();
+      weights[i - 1] = weight;
+    }
+
+    printArray(weights, "You entered: %s");
+
+    return weights;
+  }
+
+  public static void peopleWeights() {
     Scanner scnr = new Scanner(System.in);
+
+    Double[] weights = getWeights(5, scnr);
+
+    Double startingValue = 0.0;
+
+    Double sumWeights = addArray(weights, startingValue);
+
+    System.out.println(sumWeights);
 
   }
 
   public static void main(String[] args) {
-    PeopleWeights();
+    peopleWeights();
   }
 }
