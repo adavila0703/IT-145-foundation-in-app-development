@@ -78,7 +78,7 @@ public class RescueAnimal {
 	}
 
 	public AnimalType getAnimalType() {
-		return animalType;
+		return this.animalType;
 	}
 
 	public void setAnimalType(AnimalType animalType) {

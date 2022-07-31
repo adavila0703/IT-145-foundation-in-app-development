@@ -4,11 +4,19 @@ import enums.*;
 import java.util.Scanner;
 
 public class Monkey extends RescueAnimal {
+  // Instance variable
   private MonkeyBreed mokeyBreed;
 
+  // empty constructor
   public Monkey() {
   }
 
+  // constructor with name
+  public Monkey(String name) {
+    setName(name);
+  }
+
+  // main constructor
   public Monkey(
       String name,
       MonkeyBreed breed,
@@ -30,8 +38,10 @@ public class Monkey extends RescueAnimal {
     setTrainingStatus(trainingStatus);
     setReserved(reserved);
     setInServiceCountry(inServiceCountry);
+    setAnimalType(AnimalType.Monkey);
   }
 
+  // logic to intake animal data
   public void intakeMonkey(Scanner scanner) {
     intakeAnimal(scanner, AnimalType.Monkey);
 
@@ -63,6 +73,7 @@ public class Monkey extends RescueAnimal {
 
   }
 
+  // display breed
   public void displayMonkeyBreed() {
     switch (this.mokeyBreed) {
       case Capuchin:
@@ -83,10 +94,12 @@ public class Monkey extends RescueAnimal {
     }
   }
 
+  // get breed
   public MonkeyBreed getBreed() {
     return this.mokeyBreed;
   }
 
+  // set breed
   public void setBreed(MonkeyBreed mokeyBreed) {
     this.mokeyBreed = mokeyBreed;
   }

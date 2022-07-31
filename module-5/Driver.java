@@ -14,11 +14,12 @@ public class Driver {
 		initializeDogList();
 		initializeMonkeyList();
 
+		// start menu
 		while (StateSingleton.state.getAppStatus()) {
 			displayMenu();
 
 			int userInput = scnr.nextInt();
-			menuOptions(userInput, scnr);
+			menu(userInput, scnr);
 
 			System.out.flush();
 		}
@@ -26,16 +27,17 @@ public class Driver {
 
 	}
 
-	public static void menuOptions(int userInput, Scanner scanner) {
+	// handles the menu for our application
+	public static void menu(int userInput, Scanner scanner) {
 		switch (userInput) {
 			case 1:
-				intakeNewDog(scanner);
+				StateSingleton.state.intakeAnimal(scanner, AnimalType.Dog);
 				break;
 			case 2:
-				intakeNewMonkey(scanner);
+				StateSingleton.state.intakeAnimal(scanner, AnimalType.Monkey);
 				break;
 			case 3:
-				reserveAnimal(scanner);
+				StateSingleton.state.reserveAnimal(scanner);
 				break;
 			case 4:
 				StateSingleton.state.printAllAnimals(AnimalType.Dog);
@@ -54,9 +56,8 @@ public class Driver {
 		}
 	}
 
-	// This method prints the menu options
+	// displays main menu
 	public static void displayMenu() {
-
 		System.out.println("\n\n");
 		System.out.println("\t\t\t\tRescue Animal System Menu");
 		System.out.println("[1] Intake a new dog");
@@ -70,7 +71,7 @@ public class Driver {
 		System.out.println("Enter a menu selection");
 	}
 
-	// Adds dogs to a list for testing
+	// mock dogs
 	public static void initializeDogList() {
 		Dog dog1 = new Dog(
 				"Spot",
@@ -81,7 +82,8 @@ public class Driver {
 				"05-12-2019",
 				"United States",
 				TrainingStatus.Intake,
-				false, "United States");
+				false,
+				"United States");
 		Dog dog2 = new Dog(
 				"Rex",
 				DogBreed.GreatDane,
@@ -109,8 +111,7 @@ public class Driver {
 		StateSingleton.state.addAnimal(dog3);
 	}
 
-	// Adds monkeys to a list for testing
-	// Optional for testing
+	// mock monkeys
 	public static void initializeMonkeyList() {
 		Monkey monkey1 = new Monkey(
 				"Jerry",
@@ -138,88 +139,5 @@ public class Driver {
 		StateSingleton.state.addAnimal(monkey1);
 		StateSingleton.state.addAnimal(monkey2);
 
-	}
-
-	// Complete the intakeNewDog method
-	// The input validation to check that the dog is not already in the list
-	// is done for you
-	public static void intakeNewDog(Scanner scanner) {
-		System.out.println("What is the dog's name?");
-		while (true) {
-			String name = scanner.next();
-
-			if (!StateSingleton.state.animalNameAvailability(name, AnimalType.Dog)) {
-				System.out.println("Sorry the dog's name has been taken, try again");
-				continue;
-			}
-
-			break;
-		}
-
-		Dog dog = new Dog();
-
-		dog.intakeDog(scanner);
-
-		StateSingleton.state.addAnimal(dog);
-
-		System.out.printf("%s is now in the system.\n", dog.getName());
-	}
-
-	// // Add the code to instantiate a new dog and add it to the appropriate list
-	// }
-
-	// Complete intakeNewMonkey
-	// Instantiate and add the new monkey to the appropriate list
-	// For the project submission you must also validate the input
-	// to make sure the monkey doesn't already exist and the species type is allowed
-	public static void intakeNewMonkey(Scanner scanner) {
-		System.out.println("What is the monkey's name?");
-		while (true) {
-			String name = scanner.next();
-
-			if (!StateSingleton.state.animalNameAvailability(name, AnimalType.Monkey)) {
-				System.out.println("Sorry the monkey's name has been taken, try again");
-				continue;
-			}
-
-			break;
-		}
-
-		Monkey monkey = new Monkey();
-
-		monkey.intakeMonkey(scanner);
-
-		StateSingleton.state.addAnimal(monkey);
-
-		System.out.printf("%s is now in the system.\n", monkey.getName());
-	}
-
-	// Complete reserveAnimal
-	// You will need to find the animal by animal type and in service country
-	public static void reserveAnimal(Scanner scanner) {
-		System.out.println("The method reserveAnimal needs to be implemented");
-
-	}
-
-	// Complete printAnimals
-	// Include the animal name, status, acquisition country and if the animal is
-	// reserved.
-	// Remember that this method connects to three different menu items.
-	// The printAnimals() method has three different outputs
-	// based on the listType parameter
-	// dog - prints the list of dogs
-	// monkey - prints the list of monkeys
-	// available - prints a combined list of all animals that are
-	// fully trained ("in service") but not reserved
-	// Remember that you only have to fully implement ONE of these lists.
-	// The other lists can have a print statement saying "This option needs to be
-	// implemented".
-	// To score "exemplary" you must correctly implement the "available" list.
-	public static void printAnimals() {
-		System.out.println("The method printAnimals needs to be implemented");
-	}
-
-	public static void appError(String err) {
-		System.out.printf("Error: %s", err);
 	}
 }
