@@ -1,5 +1,4 @@
-import java.lang.reflect.Array;
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 public class labs {
@@ -42,39 +41,51 @@ public class labs {
   public static <T> void printArray(T[] arr, String startingMessage) {
     String arrMessage = "";
     for (int i = 0; i < arr.length; i++) {
+      if (i == 0) {
+        arrMessage += arr[i].toString();
+        continue;
+      }
       arrMessage += " " + arr[i].toString();
     }
     arrMessage += "\n";
     System.out.printf(startingMessage, arrMessage);
   }
 
-  public static <T> T addArray(T[] arr, T startingValue) {
-    T summation = startingValue;
+  public static Double addWeights(Double[] arr, double startingValue) {
+    Double summation = startingValue;
     for (int i = 0; i < arr.length; i++) {
-      if (summation.getClass() == Double.class) {
-        (T) (Double) summation += (Double) arr[i];
-      }
+      summation += arr[i];
     }
     return summation;
   }
 
-  public static <T> void addArray(T[] arr) {
+  public static Double averageWeights(Double[] arr, double startingValue) {
+    Double summation = startingValue;
     for (int i = 0; i < arr.length; i++) {
-      System.out.print(arr[i]);
+      summation += arr[i];
     }
+    return summation / arr.length;
+  }
+
+  public static Double maxWeight(Double[] arr, double startingValue) {
+    Double value = startingValue;
+    for (int i = 0; i < arr.length; i++) {
+      if (arr[i] > value) {
+        value = arr[i];
+      }
+    }
+    return value;
   }
 
   public static Double[] getWeights(Integer numberOfWeights, Scanner scnr) {
     Double[] weights = new Double[numberOfWeights];
-    String message = "Enter weight %s:";
+    String message = "Enter weight %s: ";
 
     for (int i = 1; i < numberOfWeights + 1; i++) {
       System.out.printf(message, i);
       Double weight = scnr.nextDouble();
       weights[i - 1] = weight;
     }
-
-    printArray(weights, "You entered: %s");
 
     return weights;
   }
@@ -84,12 +95,17 @@ public class labs {
 
     Double[] weights = getWeights(5, scnr);
 
+    printArray(weights, "\nYou entered: %s");
+
     Double startingValue = 0.0;
 
-    Double sumWeights = addArray(weights, startingValue);
+    Double sumWeights = addWeights(weights, startingValue);
+    Double averageWeights = averageWeights(weights, startingValue);
+    Double maxWeight = maxWeight(weights, startingValue);
 
-    System.out.println(sumWeights);
-
+    System.out.printf("Total weight: %s\n", sumWeights);
+    System.out.printf("Average weight: %s\n", averageWeights);
+    System.out.printf("Max weight: %s\n", maxWeight);
   }
 
   public static void main(String[] args) {
