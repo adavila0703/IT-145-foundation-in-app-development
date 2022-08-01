@@ -51,6 +51,7 @@ public class State {
     int count = 1;
 
     for (RescueAnimal animal : animals) {
+
       if (animal.getAnimalType() == animalType) {
         System.out.printf("%d. %s \n", count, animal.getName());
         count++;
