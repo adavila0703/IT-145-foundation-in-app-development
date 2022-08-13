@@ -1,6 +1,12 @@
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
 
 public class labs {
   public static void parsingNames() {
@@ -37,40 +43,40 @@ public class labs {
 
     // Java switch/case statement
     switch (monthString) {
-      case "January":
+      case "january":
         monthInt = 1;
         break;
-      case "February":
+      case "february":
         monthInt = 2;
         break;
-      case "March":
+      case "march":
         monthInt = 3;
         break;
-      case "April":
+      case "april":
         monthInt = 4;
         break;
-      case "May":
+      case "may":
         monthInt = 5;
         break;
-      case "June":
+      case "june":
         monthInt = 6;
         break;
-      case "July":
+      case "july":
         monthInt = 7;
         break;
-      case "August":
+      case "august":
         monthInt = 8;
         break;
-      case "September":
+      case "september":
         monthInt = 9;
         break;
-      case "October":
+      case "october":
         monthInt = 10;
         break;
-      case "November":
+      case "november":
         monthInt = 11;
         break;
-      case "December":
+      case "december":
         monthInt = 12;
         break;
       default:
@@ -80,22 +86,53 @@ public class labs {
     return monthInt;
   }
 
-  public static void dateFormatCheck(String dateString) {
-    // dateString.substring(beginIndex)
-  }
-
   public static void parsingDates() {
     Scanner scnr = new Scanner(System.in);
+    String dateString = scnr.nextLine();
+    String[] monthDateYear;
+    while (!dateString.contains("-1")) {
+      if (dateString.contains(",")) {
+        monthDateYear = dateString.split(",");
+        String[] monthDate = monthDateYear[0].split(" ");
+        System.out.printf("%s/%s/%s\n", getMonthAsInt(monthDate[0].toLowerCase()), monthDate[1],
+            monthDateYear[1].strip());
+      }
+      dateString = scnr.nextLine();
+    }
+  }
 
-    // TODO: Read dates from input, parse the dates to find the ones
-    // in the correct format, and output in m/d/yyyy format
-    String test = "March 1, 1990";
-    String woop = test.substring(1);
-    System.out.println(woop);
+  public static void fileNameChange() {
+    Scanner scnr = new Scanner(System.in);
+    String userInput = scnr.nextLine();
+
+    File test = new File(".");
+    String[] files = test.list();
+    String scannedFile = "";
+
+    for (String file : files) {
+      if (file.contains(userInput)) {
+        scannedFile = file;
+      }
+    }
+
+    try {
+      File file = new File(scannedFile);
+      Scanner fileReader = new Scanner(file);
+
+      while (fileReader.hasNextLine()) {
+        String data = fileReader.nextLine();
+        String newData = data.replace("_photo.jpg", "_info.txt");
+        System.out.println(newData);
+      }
+
+      fileReader.close();
+    } catch (FileNotFoundException e) {
+    }
   }
 
   public static void main(String[] args) {
     // parsingNames();
-    parsingDates();
+    // parsingDates();
+    fileNameChange();
   }
 }

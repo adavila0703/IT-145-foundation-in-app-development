@@ -82,7 +82,7 @@ public class labs {
     String message = "Enter weight %s: ";
 
     for (int i = 1; i < numberOfWeights + 1; i++) {
-      System.out.printf(message, i);
+      System.out.printf(message + "\n", i);
       Double weight = scnr.nextDouble();
       weights[i - 1] = weight;
     }
@@ -95,7 +95,7 @@ public class labs {
 
     Double[] weights = getWeights(5, scnr);
 
-    printArray(weights, "\nYou entered: %s");
+    printArray(weights, "\nYou entered: %s\n");
 
     Double startingValue = 0.0;
 
